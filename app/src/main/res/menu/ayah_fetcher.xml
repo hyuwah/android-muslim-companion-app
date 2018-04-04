@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <item android:title="Edition">
+    <menu>
+      <item android:id="@+id/action_ed_default"
+        android:title="Arabic"/>
+      <item android:title="Indonesia">
+        <menu>
+          <item
+            android:id="@+id/action_ed_id_indonesian"
+            android:title="Indonesia"/>
+          <item
+            android:id="@+id/action_ed_id_muntakhab"
+            android:title="Quraish Shihab"/>
+        </menu>
+      </item>
+      <item android:title="English">
+        <menu>
+          <item
+            android:id="@+id/action_ed_en_transliteration"
+            android:title="Transliteration"/>
+          <item
+            android:id="@+id/action_ed_en_ahmedali"
+            android:title="Ahmed Ali"/>
+          <item
+            android:id="@+id/action_ed_en_asad"
+            android:title="Muhammad Asad"/>
+          <item
+            android:id="@+id/action_ed_en_hilali"
+            android:title="Hilali &amp; Khan"/>
+          <item
+            android:id="@+id/action_ed_en_pickthall"
+            android:title="Pickthall"/>
+          <item
+            android:id="@+id/action_ed_en_sahih"
+            android:title="Saheeh International"/>
+        </menu>
+      </item>
+    </menu>
+  </item>
+</menu>
