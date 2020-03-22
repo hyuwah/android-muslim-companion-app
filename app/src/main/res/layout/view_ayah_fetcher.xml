@@ -15,6 +15,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="32dp"
     android:backgroundTint="@color/colorAccent"
+    android:textColor="@color/textPrimary"
     android:text="Next"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
@@ -125,7 +126,7 @@
         android:orientation="horizontal">
         <Button
           android:id="@+id/btn_favorite"
-          style="@style/Widget.AppCompat.Button.Borderless"
+          style="@style/Widget.MaterialComponents.Button.TextButton"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
@@ -133,7 +134,7 @@
           android:textColor="@color/textSecondary"/>
         <Button
           android:id="@+id/btn_share"
-          style="@style/Widget.AppCompat.Button.Borderless"
+          style="@style/Widget.MaterialComponents.Button.TextButton"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
