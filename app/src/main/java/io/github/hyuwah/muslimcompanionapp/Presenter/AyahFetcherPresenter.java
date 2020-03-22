@@ -30,7 +30,7 @@ public class AyahFetcherPresenter implements AyahFetcherContract.Presenter {
 
     // Check edition from prefs
     String edition = SharedPrefsManager.getInstance().getString(Key.EDITION_KEY, "en.asad");
-    Call call = service.getAyahByEdition(id,edition);
+    Call<Ayah> call = service.getAyahByEdition(id,edition);
 
     view.showLoading(); // Show loading
 

@@ -4,13 +4,13 @@ package io.github.hyuwah.muslimcompanionapp.View;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,7 +20,6 @@ import android.view.ViewGroup;
 
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -94,9 +93,9 @@ public class AyahFetcherView extends Fragment implements AyahFetcherContract.Vie
     super.onViewCreated(fview, savedInstanceState);
 
     // Fetch random if no previous fetched ayah
-    if(SharedPrefsManager.getInstance().getInt(Key.CURRENT_AYAH_ID_INT,0)!=0){
+    if (SharedPrefsManager.getInstance().getInt(Key.CURRENT_AYAH_ID_INT, 0) != 0) {
       presenter.fetchAyah(SharedPrefsManager.getInstance().getInt(Key.CURRENT_AYAH_ID_INT));
-    }else {
+    } else {
       presenter.fetchRandomAyah();
     }
 
@@ -106,23 +105,24 @@ public class AyahFetcherView extends Fragment implements AyahFetcherContract.Vie
       presenter.fetchRandomAyah();
     });
 
-    btnFavorite.setOnClickListener(view->{
+    btnFavorite.setOnClickListener(view -> {
 
       if (btnFavorite.getText().toString().equals("+ Favorite")) {
-        btnFavorite.setTextColor(getActivity().getColor(R.color.colorPrimary));
+        btnFavorite.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary));
         btnFavorite.setText("- Favorite");
         Snackbar.make(getView(), "Favorited", Snackbar.LENGTH_SHORT).show();
       } else {
-        btnFavorite.setTextColor(getActivity().getColor(R.color.textSecondary));
+        btnFavorite.setTextColor(ContextCompat.getColor(requireContext(), R.color.textSecondary));
         btnFavorite.setText("+ Favorite");
         Snackbar.make(getView(), "Unfavorited", Snackbar.LENGTH_SHORT).show();
       }
 
     });
 
-    btnShare.setOnClickListener(view->{
+    btnShare.setOnClickListener(view -> {
       String message = tvAyahText.getText().toString() + "\n";
-      message += "-- " + tvSurahName.getText().toString() + " (" + tvSurahNameTranslation.getText().toString() + ") " + tvAyahNumber.getText().toString();
+      message += "-- " + tvSurahName.getText().toString() + " (" + tvSurahNameTranslation.getText()
+          .toString() + ") " + tvAyahNumber.getText().toString();
       message += "\n\nConvey, even if it is one verse\nShared via Muslim Companion Apps";
 
       Intent sendIntent = new Intent(Intent.ACTION_SEND);
@@ -130,7 +130,7 @@ public class AyahFetcherView extends Fragment implements AyahFetcherContract.Vie
       sendIntent.setType("text/plain");
       Intent chooser = Intent.createChooser(sendIntent, "Convey, even if it is one verse");
 
-      if(sendIntent.resolveActivity(getActivity().getPackageManager())!=null){
+      if (sendIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
         startActivity(chooser);
       }
     });
@@ -145,19 +145,19 @@ public class AyahFetcherView extends Fragment implements AyahFetcherContract.Vie
 
   @Override
   public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-    inflater.inflate(R.menu.ayah_fetcher,menu);
+    inflater.inflate(R.menu.ayah_fetcher, menu);
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    int currentAyahId = SharedPrefsManager.getInstance().getInt(Key.CURRENT_AYAH_ID_INT,0);
+    int currentAyahId = SharedPrefsManager.getInstance().getInt(Key.CURRENT_AYAH_ID_INT, 0);
 
-    switch (item.getItemId()){
+    switch (item.getItemId()) {
       case R.id.action_ed_default:
 
         presenter.setAyahEdition("quran-simple");
 
-        if(currentAyahId!=0){
+        if (currentAyahId != 0) {
           presenter.fetchAyah(currentAyahId);
         }
 
@@ -166,7 +166,7 @@ public class AyahFetcherView extends Fragment implements AyahFetcherContract.Vie
 
         presenter.setAyahEdition("en.transliteration");
 
-        if(currentAyahId!=0){
+        if (currentAyahId != 0) {
           presenter.fetchAyah(currentAyahId);
         }
 
@@ -175,7 +175,7 @@ public class AyahFetcherView extends Fragment implements AyahFetcherContract.Vie
 
         presenter.setAyahEdition("id.indonesian");
 
-        if(currentAyahId!=0) {
+        if (currentAyahId != 0) {
           presenter.fetchAyah(currentAyahId);
         }
 
@@ -184,7 +184,7 @@ public class AyahFetcherView extends Fragment implements AyahFetcherContract.Vie
 
         presenter.setAyahEdition("id.muntakhab");
 
-        if(currentAyahId!=0) {
+        if (currentAyahId != 0) {
           presenter.fetchAyah(currentAyahId);
         }
 
@@ -193,7 +193,7 @@ public class AyahFetcherView extends Fragment implements AyahFetcherContract.Vie
 
         presenter.setAyahEdition("en.ahmedali");
 
-        if(currentAyahId!=0) {
+        if (currentAyahId != 0) {
           presenter.fetchAyah(currentAyahId);
         }
 
@@ -202,7 +202,7 @@ public class AyahFetcherView extends Fragment implements AyahFetcherContract.Vie
 
         presenter.setAyahEdition("en.asad");
 
-        if(currentAyahId!=0) {
+        if (currentAyahId != 0) {
           presenter.fetchAyah(currentAyahId);
         }
 
@@ -211,7 +211,7 @@ public class AyahFetcherView extends Fragment implements AyahFetcherContract.Vie
 
         presenter.setAyahEdition("en.hilali");
 
-        if(currentAyahId!=0) {
+        if (currentAyahId != 0) {
           presenter.fetchAyah(currentAyahId);
         }
 
@@ -220,7 +220,7 @@ public class AyahFetcherView extends Fragment implements AyahFetcherContract.Vie
 
         presenter.setAyahEdition("en.pickthall");
 
-        if(currentAyahId!=0) {
+        if (currentAyahId != 0) {
           presenter.fetchAyah(currentAyahId);
         }
 
@@ -229,7 +229,7 @@ public class AyahFetcherView extends Fragment implements AyahFetcherContract.Vie
 
         presenter.setAyahEdition("en.sahih");
 
-        if(currentAyahId!=0) {
+        if (currentAyahId != 0) {
           presenter.fetchAyah(currentAyahId);
         }
 
@@ -261,7 +261,9 @@ public class AyahFetcherView extends Fragment implements AyahFetcherContract.Vie
     tvAyahText.setText(ayah.getText());
     tvSurahName.setText(ayah.getSurah().getEnglishName());
     tvSurahNameTranslation.setText(ayah.getSurah().getEnglishNameTranslation());
-    tvAyahNumber.setText("["+ayah.getSurah().getNumber()+"] : "+ayah.getNumberInSurah()+" of "+ayah.getSurah().getNumberOfAyahs());
+    tvAyahNumber.setText(
+        "[" + ayah.getSurah().getNumber() + "] : " + ayah.getNumberInSurah() + " of " + ayah
+            .getSurah().getNumberOfAyahs());
     tvEdition.setText(ayah.getEdition().getEnglishName());
   }
 

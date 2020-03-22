@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
 
-  private static final String BASE_URL = "http://api.alquran.cloud/";
+  private static final String BASE_URL = "https://api.alquran.cloud/";
 
   private static Retrofit.Builder builder = new Builder().baseUrl(BASE_URL).addConverterFactory(
       GsonConverterFactory.create());
