@@ -7,10 +7,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import io.github.hyuwah.muslimcompanionapp.Contract.AyahFetcherContract
-import io.github.hyuwah.muslimcompanionapp.Model.Entity.Ayah
 import io.github.hyuwah.muslimcompanionapp.Model.SharedPrefsManager
 import io.github.hyuwah.muslimcompanionapp.Presenter.AyahFetcherPresenter
 import io.github.hyuwah.muslimcompanionapp.R
+import io.github.hyuwah.muslimcompanionapp.data.remote.model.AyahResponse
 import io.github.hyuwah.muslimcompanionapp.databinding.ViewAyahFetcherBinding
 
 /**
@@ -156,7 +156,6 @@ class AyahFetcherView : Fragment(), AyahFetcherContract.View {
         }
     }
 
-    override fun fetchSuccess() {}
     override fun fetchFailed() { //    Toast.makeText(mContext, "Network error", Toast.LENGTH_SHORT).show();
         Snackbar.make(view!!, "Network error", Snackbar.LENGTH_SHORT).show()
         binding.tvAyahText.text = "Please check your connection & try again..."
@@ -166,7 +165,7 @@ class AyahFetcherView : Fragment(), AyahFetcherContract.View {
         binding.tvAyahText.text = "Loading..."
     }
 
-    override fun showResult(ayah: Ayah.Data) {
+    override fun showResult(ayah: AyahResponse.Data) {
         binding.tvAyahText.text = ayah.text
         binding.tvSurahName.text = ayah.surah.englishName
         binding.tvSurahNameTranslation.text = ayah.surah.englishNameTranslation

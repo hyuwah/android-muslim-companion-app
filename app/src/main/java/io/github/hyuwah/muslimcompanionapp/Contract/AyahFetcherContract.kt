@@ -1,13 +1,12 @@
 package io.github.hyuwah.muslimcompanionapp.Contract
 
-import io.github.hyuwah.muslimcompanionapp.Model.Entity.Ayah
+import io.github.hyuwah.muslimcompanionapp.data.remote.model.AyahResponse
 
 interface AyahFetcherContract {
     interface View {
-        fun fetchSuccess()
         fun fetchFailed()
         fun showLoading()
-        fun showResult(ayah: Ayah.Data)
+        fun showResult(ayah: AyahResponse.Data)
         fun toggleShareButton(toggle: Boolean)
         fun toggleFavButton(toggle: Boolean)
     }
