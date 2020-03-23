@@ -1,4 +1,4 @@
-package io.github.hyuwah.muslimcompanionapp.View
+package io.github.hyuwah.muslimcompanionapp.presentation.View
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,12 +6,12 @@ import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
-import io.github.hyuwah.muslimcompanionapp.Contract.AyahFetcherContract
-import io.github.hyuwah.muslimcompanionapp.Model.SharedPrefsManager
-import io.github.hyuwah.muslimcompanionapp.Presenter.AyahFetcherPresenter
 import io.github.hyuwah.muslimcompanionapp.R
+import io.github.hyuwah.muslimcompanionapp.data.SharedPrefsManager
 import io.github.hyuwah.muslimcompanionapp.data.remote.model.AyahResponse
 import io.github.hyuwah.muslimcompanionapp.databinding.ViewAyahFetcherBinding
+import io.github.hyuwah.muslimcompanionapp.presentation.Contract.AyahFetcherContract
+import io.github.hyuwah.muslimcompanionapp.presentation.Presenter.AyahFetcherPresenter
 
 /**
  * A simple [Fragment] subclass.

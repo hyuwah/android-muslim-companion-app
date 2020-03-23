@@ -1,4 +1,4 @@
-package io.github.hyuwah.muslimcompanionapp.View
+package io.github.hyuwah.muslimcompanionapp.presentation.View
 
 import android.content.Intent
 import android.os.Bundle

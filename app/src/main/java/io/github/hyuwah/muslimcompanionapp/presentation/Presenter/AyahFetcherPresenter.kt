@@ -1,9 +1,9 @@
-package io.github.hyuwah.muslimcompanionapp.Presenter
+package io.github.hyuwah.muslimcompanionapp.presentation.Presenter
 
-import io.github.hyuwah.muslimcompanionapp.Contract.AyahFetcherContract
-import io.github.hyuwah.muslimcompanionapp.Contract.AyahFetcherContract.Presenter
-import io.github.hyuwah.muslimcompanionapp.Model.SharedPrefsManager
+import io.github.hyuwah.muslimcompanionapp.data.SharedPrefsManager
 import io.github.hyuwah.muslimcompanionapp.domain.AlQuranCloudRepository
+import io.github.hyuwah.muslimcompanionapp.presentation.Contract.AyahFetcherContract
+import io.github.hyuwah.muslimcompanionapp.presentation.Contract.AyahFetcherContract.Presenter
 import kotlinx.coroutines.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject

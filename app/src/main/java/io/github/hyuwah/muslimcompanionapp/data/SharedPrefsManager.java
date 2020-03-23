@@ -1,4 +1,4 @@
-package io.github.hyuwah.muslimcompanionapp.Model;
+package io.github.hyuwah.muslimcompanionapp.data;
 
 // Singleton SharedPreferences Manager
 
