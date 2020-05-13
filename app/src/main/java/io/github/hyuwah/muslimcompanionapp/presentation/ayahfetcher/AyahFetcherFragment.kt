@@ -2,41 +2,33 @@ package io.github.hyuwah.muslimcompanionapp.presentation.ayahfetcher
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import io.github.hyuwah.muslimcompanionapp.R
 import io.github.hyuwah.muslimcompanionapp.data.SharedPrefsManager
 import io.github.hyuwah.muslimcompanionapp.data.remote.model.AyahResponse
-import io.github.hyuwah.muslimcompanionapp.databinding.ViewAyahFetcherBinding
+import io.github.hyuwah.muslimcompanionapp.databinding.FragmentAyahFetcherBinding
+import io.github.hyuwah.muslimcompanionapp.presentation.base.viewBinding
 
-/**
- * A simple [Fragment] subclass.
- */
-class AyahFetcherFragment : Fragment(), AyahFetcherContract.View {
+class AyahFetcherFragment : Fragment(R.layout.fragment_ayah_fetcher), AyahFetcherContract.View {
 
-    private var _binding: ViewAyahFetcherBinding? = null
-    private val binding get() = _binding!!
+    private val binding by viewBinding(FragmentAyahFetcherBinding::bind)
 
     private var presenter = AyahFetcherPresenter(this)
 
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-
-        _binding = ViewAyahFetcherBinding.inflate(inflater, container, false)
-
-        activity!!.title = "Ayat Fetcher"
-
-        SharedPrefsManager.getInstance(activity!!.applicationContext)
-
-        setHasOptionsMenu(true)
-        return binding.root
-    }
-
     override fun onViewCreated(fview: View, savedInstanceState: Bundle?) {
         super.onViewCreated(fview, savedInstanceState)
+
+        requireActivity().title = "Ayat Fetcher"
+
+        SharedPrefsManager.getInstance(requireContext())
+
+        setHasOptionsMenu(true)
 
         if (SharedPrefsManager.getInstance().getInt(SharedPrefsManager.Key.CURRENT_AYAH_ID_INT, 0) != 0) {
             presenter.fetchAyah(SharedPrefsManager.getInstance().getInt(SharedPrefsManager.Key.CURRENT_AYAH_ID_INT))
@@ -52,11 +44,11 @@ class AyahFetcherFragment : Fragment(), AyahFetcherContract.View {
             if (binding.btnFavorite.text.toString() == "+ Favorite") {
                 binding.btnFavorite.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
                 binding.btnFavorite.text = "- Favorite"
-                Snackbar.make(getView()!!, "Favorited", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(requireView(), "Favorited", Snackbar.LENGTH_SHORT).show()
             } else {
                 binding.btnFavorite.setTextColor(ContextCompat.getColor(requireContext(), R.color.textSecondary))
                 binding.btnFavorite.text = "+ Favorite"
-                Snackbar.make(getView()!!, "Unfavorited", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(requireView(), "Unfavorited", Snackbar.LENGTH_SHORT).show()
             }
         }
         binding.btnShare.setOnClickListener { view: View? ->
@@ -77,7 +69,6 @@ class AyahFetcherFragment : Fragment(), AyahFetcherContract.View {
     override fun onDestroyView() {
         super.onDestroyView()
         presenter.detachView()
-        _binding = null
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -155,7 +146,7 @@ class AyahFetcherFragment : Fragment(), AyahFetcherContract.View {
     }
 
     override fun fetchFailed() { //    Toast.makeText(mContext, "Network error", Toast.LENGTH_SHORT).show();
-        Snackbar.make(view!!, "Network error", Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(requireView(), "Network error", Snackbar.LENGTH_SHORT).show()
         binding.tvAyahText.text = "Please check your connection & try again..."
     }
 
