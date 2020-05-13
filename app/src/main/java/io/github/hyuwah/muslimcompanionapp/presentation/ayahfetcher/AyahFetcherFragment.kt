@@ -1,4 +1,4 @@
-package io.github.hyuwah.muslimcompanionapp.presentation.View
+package io.github.hyuwah.muslimcompanionapp.presentation.ayahfetcher
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,13 +10,11 @@ import io.github.hyuwah.muslimcompanionapp.R
 import io.github.hyuwah.muslimcompanionapp.data.SharedPrefsManager
 import io.github.hyuwah.muslimcompanionapp.data.remote.model.AyahResponse
 import io.github.hyuwah.muslimcompanionapp.databinding.ViewAyahFetcherBinding
-import io.github.hyuwah.muslimcompanionapp.presentation.Contract.AyahFetcherContract
-import io.github.hyuwah.muslimcompanionapp.presentation.Presenter.AyahFetcherPresenter
 
 /**
  * A simple [Fragment] subclass.
  */
-class AyahFetcherView : Fragment(), AyahFetcherContract.View {
+class AyahFetcherFragment : Fragment(), AyahFetcherContract.View {
 
     private var _binding: ViewAyahFetcherBinding? = null
     private val binding get() = _binding!!

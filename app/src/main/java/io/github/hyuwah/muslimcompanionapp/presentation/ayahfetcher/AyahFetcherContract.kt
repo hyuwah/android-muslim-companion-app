@@ -1,4 +1,4 @@
-package io.github.hyuwah.muslimcompanionapp.presentation.Contract
+package io.github.hyuwah.muslimcompanionapp.presentation.ayahfetcher
 
 import io.github.hyuwah.muslimcompanionapp.data.remote.model.AyahResponse
 

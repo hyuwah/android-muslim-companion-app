@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <item
+    android:id="@+id/main_home"
+    android:icon="@drawable/ic_home_black_24dp"
+    android:title="Home" />
+  <item
+    android:id="@+id/action_prayer_time"
+    android:icon="@drawable/ic_menu_slideshow"
+    android:title="Prayer" />
+  <item
+    android:id="@+id/action_feeds"
+    android:icon="@drawable/ic_menu_manage"
+    android:title="Feeds" />
+</menu>
