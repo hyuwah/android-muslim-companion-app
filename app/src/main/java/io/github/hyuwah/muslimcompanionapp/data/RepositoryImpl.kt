@@ -1,16 +1,19 @@
 package io.github.hyuwah.muslimcompanionapp.data
 
 import io.github.hyuwah.muslimcompanionapp.data.remote.AlQuranCloudApi
+import io.github.hyuwah.muslimcompanionapp.data.remote.AladhanApi
 import io.github.hyuwah.muslimcompanionapp.data.remote.model.AyahResponse
+import io.github.hyuwah.muslimcompanionapp.data.remote.model.PrayerTimeResponse
 import io.github.hyuwah.muslimcompanionapp.domain.AlQuranCloudRepository
-import io.github.hyuwah.muslimcompanionapp.domain.MuslimSalatRepository
+import io.github.hyuwah.muslimcompanionapp.domain.AladhanRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class RepositoryImpl(
-        val alQuranCloudApi: AlQuranCloudApi
-) : AlQuranCloudRepository, MuslimSalatRepository {
+        val alQuranCloudApi: AlQuranCloudApi,
+        val aladhanApi: AladhanApi
+) : AlQuranCloudRepository, AladhanRepository {
 
     override suspend fun getAyah(id: Int): Response<AyahResponse> {
         return withContext(Dispatchers.IO) {
@@ -21,6 +24,12 @@ class RepositoryImpl(
     override suspend fun getAyatByEdition(id: Int, edition: String): Response<AyahResponse> {
         return withContext(Dispatchers.IO) {
             alQuranCloudApi.getAyahByEdition(id, edition)
+        }
+    }
+
+    override suspend fun getTodayPrayerTime(): Response<PrayerTimeResponse> {
+        return withContext(Dispatchers.IO) {
+            aladhanApi.getTodayPrayerTime("Jakarta", "Indonesia")
         }
     }
 
