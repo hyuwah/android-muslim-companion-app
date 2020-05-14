@@ -1,6 +1,8 @@
 package io.github.hyuwah.muslimcompanionapp
 
 import android.app.Application
+import io.github.hyuwah.muslimcompanionapp.di.dataModule
+import io.github.hyuwah.muslimcompanionapp.di.fragmentModule
 import io.github.hyuwah.muslimcompanionapp.di.networkModule
 import io.github.hyuwah.muslimcompanionapp.di.repoModule
 import org.koin.android.ext.koin.androidContext
@@ -15,7 +17,9 @@ class MuslimCompanionApp : Application() {
             androidContext(this@MuslimCompanionApp)
             modules(
                     networkModule,
-                    repoModule
+                    repoModule,
+                    dataModule,
+                    fragmentModule
             )
         }
     }

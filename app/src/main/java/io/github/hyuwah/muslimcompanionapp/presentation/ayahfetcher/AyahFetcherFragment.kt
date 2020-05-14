@@ -8,37 +8,34 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.observe
 import com.google.android.material.snackbar.Snackbar
 import io.github.hyuwah.muslimcompanionapp.R
 import io.github.hyuwah.muslimcompanionapp.data.SharedPrefsManager
 import io.github.hyuwah.muslimcompanionapp.data.remote.model.AyahResponse
 import io.github.hyuwah.muslimcompanionapp.databinding.FragmentAyahFetcherBinding
 import io.github.hyuwah.muslimcompanionapp.presentation.base.viewBinding
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AyahFetcherFragment : Fragment(R.layout.fragment_ayah_fetcher), AyahFetcherContract.View {
+class AyahFetcherFragment : Fragment(R.layout.fragment_ayah_fetcher) {
 
     private val binding by viewBinding(FragmentAyahFetcherBinding::bind)
-
-    private var presenter = AyahFetcherPresenter(this)
+    private val viewModel by viewModel<AyahFetcherViewModel>()
+    private val prefs by inject<SharedPrefsManager>()
 
     override fun onViewCreated(fview: View, savedInstanceState: Bundle?) {
         super.onViewCreated(fview, savedInstanceState)
-
         requireActivity().title = "Ayat Fetcher"
-
-        SharedPrefsManager.getInstance(requireContext())
-
         setHasOptionsMenu(true)
 
-        if (SharedPrefsManager.getInstance().getInt(SharedPrefsManager.Key.CURRENT_AYAH_ID_INT, 0) != 0) {
-            presenter.fetchAyah(SharedPrefsManager.getInstance().getInt(SharedPrefsManager.Key.CURRENT_AYAH_ID_INT))
-        } else {
-            presenter.fetchRandomAyah()
-        }
+        initObserver()
 
-        binding.btnFetchRandom.setOnClickListener { view: View? ->
+        viewModel.fetchAyah(prefs.getInt(SharedPrefsManager.Key.CURRENT_AYAH_ID_INT))
+
+        binding.btnFetchRandom.setOnClickListener {
             showLoading()
-            presenter.fetchRandomAyah()
+            viewModel.fetchRandomAyah()
         }
         binding.btnFavorite.setOnClickListener { view: View? ->
             if (binding.btnFavorite.text.toString() == "+ Favorite") {
@@ -66,9 +63,18 @@ class AyahFetcherFragment : Fragment(R.layout.fragment_ayah_fetcher), AyahFetche
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        presenter.detachView()
+    private fun initObserver() {
+        viewModel.uiState.observe(viewLifecycleOwner, {
+            when (it) {
+                AyahFetcher.UiState.Loading -> showLoading()
+                is AyahFetcher.UiState.Success -> {
+                    showResult(it.ayah.data)
+                }
+                is AyahFetcher.UiState.Failed -> {
+                    fetchFailed()
+                }
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -76,85 +82,57 @@ class AyahFetcherFragment : Fragment(R.layout.fragment_ayah_fetcher), AyahFetche
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val currentAyahId = SharedPrefsManager.getInstance().getInt(SharedPrefsManager.Key.CURRENT_AYAH_ID_INT, 0)
         return when (item.itemId) {
             R.id.action_ed_default -> {
-                presenter.setAyahEdition("quran-simple")
-                if (currentAyahId != 0) {
-                    presenter.fetchAyah(currentAyahId)
-                }
+                viewModel.setAyahEdition("quran-simple")
                 true
             }
             R.id.action_ed_en_transliteration -> {
-                presenter.setAyahEdition("en.transliteration")
-                if (currentAyahId != 0) {
-                    presenter.fetchAyah(currentAyahId)
-                }
+                viewModel.setAyahEdition("en.transliteration")
                 true
             }
             R.id.action_ed_id_indonesian -> {
-                presenter.setAyahEdition("id.indonesian")
-                if (currentAyahId != 0) {
-                    presenter.fetchAyah(currentAyahId)
-                }
+                viewModel.setAyahEdition("id.indonesian")
                 true
             }
             R.id.action_ed_id_muntakhab -> {
-                presenter.setAyahEdition("id.muntakhab")
-                if (currentAyahId != 0) {
-                    presenter.fetchAyah(currentAyahId)
-                }
+                viewModel.setAyahEdition("id.muntakhab")
                 true
             }
             R.id.action_ed_en_ahmedali -> {
-                presenter.setAyahEdition("en.ahmedali")
-                if (currentAyahId != 0) {
-                    presenter.fetchAyah(currentAyahId)
-                }
+                viewModel.setAyahEdition("en.ahmedali")
                 true
             }
             R.id.action_ed_en_asad -> {
-                presenter.setAyahEdition("en.asad")
-                if (currentAyahId != 0) {
-                    presenter.fetchAyah(currentAyahId)
-                }
+                viewModel.setAyahEdition("en.asad")
                 true
             }
             R.id.action_ed_en_hilali -> {
-                presenter.setAyahEdition("en.hilali")
-                if (currentAyahId != 0) {
-                    presenter.fetchAyah(currentAyahId)
-                }
+                viewModel.setAyahEdition("en.hilali")
                 true
             }
             R.id.action_ed_en_pickthall -> {
-                presenter.setAyahEdition("en.pickthall")
-                if (currentAyahId != 0) {
-                    presenter.fetchAyah(currentAyahId)
-                }
+                viewModel.setAyahEdition("en.pickthall")
                 true
             }
             R.id.action_ed_en_sahih -> {
-                presenter.setAyahEdition("en.sahih")
-                if (currentAyahId != 0) {
-                    presenter.fetchAyah(currentAyahId)
-                }
+                viewModel.setAyahEdition("en.sahih")
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    override fun fetchFailed() { //    Toast.makeText(mContext, "Network error", Toast.LENGTH_SHORT).show();
+    private fun fetchFailed() {
         Snackbar.make(requireView(), "Network error", Snackbar.LENGTH_SHORT).show()
         binding.tvAyahText.text = "Please check your connection & try again..."
     }
 
-    override fun showLoading() {
+    private fun showLoading() {
         binding.tvAyahText.text = "Loading..."
     }
 
-    override fun showResult(ayah: AyahResponse.Data) {
+    private fun showResult(ayah: AyahResponse.Data) {
         binding.tvAyahText.text = ayah.text
         binding.tvSurahName.text = ayah.surah.englishName
         binding.tvSurahNameTranslation.text = ayah.surah.englishNameTranslation
@@ -163,11 +141,11 @@ class AyahFetcherFragment : Fragment(R.layout.fragment_ayah_fetcher), AyahFetche
         binding.tvEdition.text = ayah.edition.englishName
     }
 
-    override fun toggleShareButton(toggle: Boolean) {
+    fun toggleShareButton(toggle: Boolean) {
         binding.btnShare.isEnabled = toggle
     }
 
-    override fun toggleFavButton(toggle: Boolean) {
+    fun toggleFavButton(toggle: Boolean) {
         binding.btnFavorite.isEnabled = toggle
     }
 }
