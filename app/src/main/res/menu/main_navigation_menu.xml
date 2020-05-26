@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
   <item
     android:id="@+id/main_home"
-    android:icon="@drawable/ic_home_black_24dp"
+    android:icon="@drawable/ic_quran"
     android:title="Home" />
   <item
     android:id="@+id/action_prayer_time"
-    android:icon="@drawable/ic_menu_slideshow"
+    android:icon="@drawable/ic_mosque"
     android:title="Prayer" />
   <item
     android:id="@+id/action_feeds"

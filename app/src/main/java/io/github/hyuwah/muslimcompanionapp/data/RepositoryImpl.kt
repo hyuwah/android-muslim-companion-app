@@ -11,8 +11,8 @@ import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class RepositoryImpl(
-        val alQuranCloudApi: AlQuranCloudApi,
-        val aladhanApi: AladhanApi
+        private val alQuranCloudApi: AlQuranCloudApi,
+        private val aladhanApi: AladhanApi
 ) : AlQuranCloudRepository, AladhanRepository {
 
     override suspend fun getAyah(id: Int): Response<AyahResponse> {
