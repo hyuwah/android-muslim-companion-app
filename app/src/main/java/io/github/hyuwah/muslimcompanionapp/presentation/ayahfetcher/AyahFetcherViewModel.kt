@@ -1,5 +1,7 @@
 package io.github.hyuwah.muslimcompanionapp.presentation.ayahfetcher
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import io.github.hyuwah.muslimcompanionapp.data.SharedPrefsManager
 import io.github.hyuwah.muslimcompanionapp.data.remote.model.AyahResponse
@@ -26,6 +28,14 @@ class AyahFetcherViewModel(
     override val ayah = ActionStateLiveData(viewModelScope.coroutineContext) {
         repo.getAyatByEdition(id, edition)
     }
+
+    private val _isFavorite = MutableLiveData<Boolean>()
+    val isFavorite = _isFavorite as LiveData<Boolean>
+
+    fun toggleFavorite() {
+        _isFavorite.postValue(!(_isFavorite.value ?: false))
+    }
+
 
     init {
         if (id == 0) fetchRandomAyah() else ayah.load()

@@ -2,6 +2,7 @@ package io.github.hyuwah.muslimcompanionapp.presentation.ayahfetcher
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.PopupMenu
@@ -29,7 +30,7 @@ class AyahFetcherFragment : Fragment(R.layout.fragment_ayah_fetcher) {
     }
 
     private fun initObserver() {
-        viewModel.ayah.state.observe(viewLifecycleOwner, {
+        viewModel.ayah.state.observe(viewLifecycleOwner) {
             when (it) {
                 UIState.Loading -> showLoading()
                 is UIState.Success -> {
@@ -39,13 +40,20 @@ class AyahFetcherFragment : Fragment(R.layout.fragment_ayah_fetcher) {
                     fetchFailed()
                 }
             }
-        })
+        }
+        viewModel.isFavorite.observe(viewLifecycleOwner) {
+            val icon = if (it) R.drawable.ic_baseline_favorite
+            else R.drawable.ic_baseline_favorite_border
+            binding.btnFavorite.setImageResource(icon)
+        }
     }
 
     private fun setupListener() {
         with(binding) {
             btnFetchRandom.setOnClickListener { viewModel.fetchRandomAyah() }
             btnShare.setOnClickListener { shareAyah() }
+            btnFavorite.setOnClickListener { viewModel.toggleFavorite() }
+            tvAyahText.movementMethod = ScrollingMovementMethod()
         }
     }
 

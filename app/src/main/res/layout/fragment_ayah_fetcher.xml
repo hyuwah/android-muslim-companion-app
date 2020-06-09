@@ -32,21 +32,21 @@
     android:id="@+id/btn_more_options"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="?actionBarItemBackground"
     android:src="@drawable/ic_baseline_more_vert"
     android:tint="@android:color/white"
-    android:background="?actionBarItemBackground"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintEnd_toEndOf="parent" />
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
     android:id="@+id/tv_ayah_number"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
     android:textAlignment="textEnd"
     android:textAllCaps="false"
     android:textColor="@android:color/white"
     android:textSize="14sp"
-    android:layout_marginTop="8dp"
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintTop_toBottomOf="@id/btn_more_options"
     tools:text="[1] : 1 of 7" />
@@ -54,7 +54,6 @@
     android:id="@+id/tv_edition"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="24dp"
     android:textAlignment="textEnd"
     android:textColor="@android:color/white"
     android:textSize="12sp"
@@ -81,11 +80,27 @@
     android:scrollbars="vertical"
     android:textAlignment="center"
     android:textColor="@android:color/white"
-    android:textStyle="bold"
     android:textSize="18sp"
-    app:layout_constraintBottom_toTopOf="@id/barrier_bottom"
-    app:layout_constraintTop_toTopOf="@id/barrier_top"
+    android:textStyle="bold"
+    app:layout_constraintBottom_toBottomOf="@id/separator_bottom"
+    app:layout_constraintTop_toTopOf="@id/separator_top"
     tools:text="Dengan menyebut nama Allah yang Maha Pengasih lagi Maha Penyanyang" />
+
+  <View
+    android:id="@+id/separator_top"
+    android:layout_width="match_parent"
+    android:layout_height="6dp"
+    android:layout_marginTop="24dp"
+    android:background="@drawable/view_shadow_green_down"
+    app:layout_constraintTop_toTopOf="@id/barrier_top" />
+
+  <View
+    android:id="@+id/separator_bottom"
+    android:layout_width="match_parent"
+    android:layout_height="6dp"
+    android:layout_marginBottom="24dp"
+    android:background="@drawable/view_shadow_green_up"
+    app:layout_constraintBottom_toBottomOf="@id/barrier_bottom" />
 
   <androidx.constraintlayout.widget.Barrier
     android:id="@+id/barrier_bottom"
@@ -96,22 +111,23 @@
 
   <ImageButton
     android:id="@+id/btn_favorite"
-    android:layout_width="32dp"
-    android:layout_height="32dp"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:padding="12dp"
+    android:background="?actionBarItemBackground"
     android:scaleType="fitCenter"
     android:src="@drawable/ic_baseline_favorite_border"
     android:tint="@android:color/white"
-    android:background="?actionBarItemBackground"
-    app:layout_constraintTop_toTopOf="@id/btn_fetch_random"
     app:layout_constraintBottom_toBottomOf="@id/btn_fetch_random"
     app:layout_constraintEnd_toStartOf="@id/btn_fetch_random"
-    app:layout_constraintStart_toStartOf="parent" />
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@id/btn_fetch_random" />
 
   <com.google.android.material.floatingactionbutton.FloatingActionButton
     android:id="@+id/btn_fetch_random"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="32dp"
+    android:layout_marginBottom="24dp"
     android:src="@drawable/ic_baseline_loop"
     app:backgroundTint="@color/colorAccent"
     app:layout_constraintBottom_toBottomOf="parent"
@@ -120,16 +136,17 @@
 
   <ImageButton
     android:id="@+id/btn_share"
-    android:layout_width="32dp"
-    android:layout_height="32dp"
+    android:layout_width="48dp"
+    android:layout_height="48dp"
+    android:padding="12dp"
+    android:background="?actionBarItemBackground"
     android:scaleType="fitCenter"
     android:src="@drawable/ic_baseline_share"
     android:tint="@android:color/white"
-    android:background="?actionBarItemBackground"
-    app:layout_constraintTop_toTopOf="@id/btn_fetch_random"
     app:layout_constraintBottom_toBottomOf="@id/btn_fetch_random"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toEndOf="@id/btn_fetch_random" />
+    app:layout_constraintStart_toEndOf="@id/btn_fetch_random"
+    app:layout_constraintTop_toTopOf="@id/btn_fetch_random" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

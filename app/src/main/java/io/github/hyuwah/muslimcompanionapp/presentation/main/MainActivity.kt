@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         val navAdapter = MainNavigationAdapter(this)
         binding.mainViewpager.apply {
             adapter = navAdapter
+            isUserInputEnabled = false
         }
         binding.mainNav.setupWithViewPager2(binding.mainViewpager)
     }
