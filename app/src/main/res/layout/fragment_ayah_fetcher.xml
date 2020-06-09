@@ -1,146 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="#e4e4e4"
+  android:background="@drawable/bg_green_gradient"
+  android:padding="12dp"
   tools:context=".presentation.main.MainActivity">
 
-  <Button
+  <TextView
+    android:id="@+id/tv_surah_name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@android:color/white"
+    android:textSize="18sp"
+    android:textStyle="bold"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    tools:text="Al-Fatihaah" />
+  <TextView
+    android:id="@+id/tv_surah_name_translation"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@android:color/white"
+    android:textSize="14sp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tv_surah_name"
+    tools:text="The Opening" />
+
+  <ImageButton
+    android:id="@+id/btn_more_options"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_baseline_more_vert"
+    android:tint="@android:color/white"
+    android:background="?actionBarItemBackground"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+  <TextView
+    android:id="@+id/tv_ayah_number"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAlignment="textEnd"
+    android:textAllCaps="false"
+    android:textColor="@android:color/white"
+    android:textSize="14sp"
+    android:layout_marginTop="8dp"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/btn_more_options"
+    tools:text="[1] : 1 of 7" />
+  <TextView
+    android:id="@+id/tv_edition"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="24dp"
+    android:textAlignment="textEnd"
+    android:textColor="@android:color/white"
+    android:textSize="12sp"
+    android:textStyle="italic"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tv_ayah_number"
+    tools:text="Muhammad Quraish Shihab et al" />
+
+  <androidx.constraintlayout.widget.Barrier
+    android:id="@+id/barrier_top"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:barrierDirection="bottom"
+    app:constraint_referenced_ids="tv_surah_name_translation, tv_edition" />
+
+  <TextView
+    android:id="@+id/tv_ayah_text"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:gravity="center"
+    android:lineSpacingExtra="8sp"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:scrollbars="vertical"
+    android:textAlignment="center"
+    android:textColor="@android:color/white"
+    android:textStyle="bold"
+    android:textSize="18sp"
+    app:layout_constraintBottom_toTopOf="@id/barrier_bottom"
+    app:layout_constraintTop_toTopOf="@id/barrier_top"
+    tools:text="Dengan menyebut nama Allah yang Maha Pengasih lagi Maha Penyanyang" />
+
+  <androidx.constraintlayout.widget.Barrier
+    android:id="@+id/barrier_bottom"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:barrierDirection="top"
+    app:constraint_referenced_ids="btn_fetch_random, btn_favorite, btn_share" />
+
+  <ImageButton
+    android:id="@+id/btn_favorite"
+    android:layout_width="32dp"
+    android:layout_height="32dp"
+    android:scaleType="fitCenter"
+    android:src="@drawable/ic_baseline_favorite_border"
+    android:tint="@android:color/white"
+    android:background="?actionBarItemBackground"
+    app:layout_constraintTop_toTopOf="@id/btn_fetch_random"
+    app:layout_constraintBottom_toBottomOf="@id/btn_fetch_random"
+    app:layout_constraintEnd_toStartOf="@id/btn_fetch_random"
+    app:layout_constraintStart_toStartOf="parent" />
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
     android:id="@+id/btn_fetch_random"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="32dp"
-    android:backgroundTint="@color/colorAccent"
-    android:textColor="@color/textPrimary"
-    android:text="Next"
+    android:src="@drawable/ic_baseline_loop"
+    app:backgroundTint="@color/colorAccent"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"/>
-  <androidx.cardview.widget.CardView
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    android:layout_marginTop="32dp"
-    android:layout_marginBottom="32dp"
-    android:layout_marginStart="32dp"
-    android:layout_marginEnd="32dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp"
-    app:contentPadding="12dp"
-    app:layout_constraintBottom_toTopOf="@+id/btn_fetch_random"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
-    <LinearLayout
-      android:id="@+id/we"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:orientation="vertical"
-      >
-      <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    app:layout_constraintEnd_toStartOf="@id/btn_share"
+    app:layout_constraintStart_toEndOf="@id/btn_favorite" />
 
-        <TextView
-          android:id="@+id/tv_surah_name"
-          android:textStyle="bold"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textColor="@color/textPrimary"
-          android:textSize="18sp"
-          app:layout_constraintTop_toTopOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          tools:text="Al-Fatihaah"/>
-        <TextView
-          android:id="@+id/tv_surah_name_translation"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textColor="@android:color/secondary_text_light"
-          android:textSize="14sp"
-          app:layout_constraintTop_toBottomOf="@+id/tv_surah_name"
-          app:layout_constraintStart_toStartOf="parent"
-          tools:text="The Opening"/>
-        <TextView
-          android:id="@+id/tv_ayah_number"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textAlignment="textEnd"
-          android:textAllCaps="false"
-          android:textColor="@android:color/secondary_text_light"
-          android:textSize="14sp"
-          app:layout_constraintRight_toRightOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          tools:text="[1] : 1 of 7"/>
-        <TextView
-          android:id="@+id/tv_edition"
-          android:textStyle="italic"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="24dp"
-          android:textAlignment="textEnd"
-          android:textColor="@color/textSecondary"
-          android:textSize="12sp"
-          app:layout_constraintLeft_toRightOf="@+id/tv_surah_name_translation"
-          app:layout_constraintRight_toRightOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/tv_surah_name"
-          tools:text="Muhammad Quraish Shihab et al"/>
-      </androidx.constraintlayout.widget.ConstraintLayout>
-      <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="5"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:fillViewport="true">
-        <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:gravity="center"
-          android:orientation="vertical">
-          <TextView
-            android:id="@+id/tv_ayah_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:gravity="center"
-            android:lineSpacingExtra="8sp"
-            android:scrollbars="vertical"
-            android:textAlignment="center"
-            android:textColor="@color/textPrimary"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Dengan menyebut nama Allah yang Maha Pengasih lagi Maha Penyanyang"/>
-        </LinearLayout>
-      </ScrollView>
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-          android:id="@+id/btn_favorite"
-          style="@style/Widget.MaterialComponents.Button.TextButton"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:text="+ Favorite"
-          android:textColor="@color/textSecondary"/>
-        <Button
-          android:id="@+id/btn_share"
-          style="@style/Widget.MaterialComponents.Button.TextButton"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:text="Share"
-          android:textColor="@color/colorPrimary"/>
-      </LinearLayout>
-    </LinearLayout>
-  </androidx.cardview.widget.CardView>
+  <ImageButton
+    android:id="@+id/btn_share"
+    android:layout_width="32dp"
+    android:layout_height="32dp"
+    android:scaleType="fitCenter"
+    android:src="@drawable/ic_baseline_share"
+    android:tint="@android:color/white"
+    android:background="?actionBarItemBackground"
+    app:layout_constraintTop_toTopOf="@id/btn_fetch_random"
+    app:layout_constraintBottom_toBottomOf="@id/btn_fetch_random"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/btn_fetch_random" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,10 +2,9 @@ package io.github.hyuwah.muslimcompanionapp.presentation.ayahfetcher
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import com.google.android.material.snackbar.Snackbar
@@ -24,9 +23,9 @@ class AyahFetcherFragment : Fragment(R.layout.fragment_ayah_fetcher) {
     override fun onViewCreated(fview: View, savedInstanceState: Bundle?) {
         super.onViewCreated(fview, savedInstanceState)
         requireActivity().title = "Ayat Fetcher"
-        setHasOptionsMenu(true)
         initObserver()
         setupListener()
+        setupMenu()
     }
 
     private fun initObserver() {
@@ -50,11 +49,19 @@ class AyahFetcherFragment : Fragment(R.layout.fragment_ayah_fetcher) {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.ayah_fetcher, menu)
+    private fun setupMenu() {
+        val popupMenu = PopupMenu(requireContext(), binding.btnMoreOptions).apply {
+            inflate(R.menu.ayah_fetcher)
+            setOnMenuItemClickListener {
+                onMenuItemSelected(it)
+            }
+        }
+        binding.btnMoreOptions.setOnClickListener {
+            popupMenu.show()
+        }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    private fun onMenuItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_ed_default -> {
                 viewModel.setAyahEdition("quran-simple")
@@ -92,7 +99,7 @@ class AyahFetcherFragment : Fragment(R.layout.fragment_ayah_fetcher) {
                 viewModel.setAyahEdition("en.sahih")
                 true
             }
-            else -> super.onOptionsItemSelected(item)
+            else -> false
         }
     }
 
