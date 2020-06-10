@@ -3,21 +3,36 @@
 
 ![Logo](http://res.cloudinary.com/hyuwah-github-io/image/upload/c_scale,w_128/v1522855884/muslim-companion-app-logo.png)
 
-A work in progress app to learn MVP pattern. Data provided by [Al Quran Cloud API](https://alquran.cloud/api).
+A work in progress app to show random quran verse. prayer times & qibla compass.  
+Data provided by [Al Quran Cloud API](https://alquran.cloud/api) & [Aladhan API](https://aladhan.com/prayer-times-api).
 
 **Features**
 
-* Fetch Random Ayat from Quran
-* Transliteration & translation
-    * Indonesia
-    * English
-* Share ayat
+* Quran verse
+    * Fetch Random Ayat from Quran
+    * Transliteration & translation
+        * Simple Arabic
+        * Indonesia
+        * English
+    * Share ayat
+* Prayer Times (WIP, Jakarta only for now)
+* Qibla compass (WIP, Jakarta only for now)
 
-## Screenshot
+## Preview
 
-![Ayat Fetcher](https://res.cloudinary.com/hyuwah-github-io/image/upload/c_scale,h_640/v1522857094/mca_ayat_fetcher.png)
-![Ayat Fetcher Translation Options](https://res.cloudinary.com/hyuwah-github-io/image/upload/c_scale,h_640/v1522857094/mca_ayat_fetcher_translation_options.png)
-![Main Drawer](https://res.cloudinary.com/hyuwah-github-io/image/upload/c_scale,h_640/v1522857153/mca_main_drawer.png)
+![mvp](https://res.cloudinary.com/hyuwah-github-io/image/upload/v1591783251/Muslim%20Companion%20Apps/mvp_ayah_prayer_qibla.gif)
+
+**Quran Verse**
+
+![ayah fetcher](https://res.cloudinary.com/hyuwah-github-io/image/upload/v1591783244/Muslim%20Companion%20Apps/ayah_fetcher_redesign.png)
+
+**Prayer Time**
+
+![prayer time](https://res.cloudinary.com/hyuwah-github-io/image/upload/v1591783243/Muslim%20Companion%20Apps/prayer_times.png)
+
+**Qibla Compass**
+
+![qibla compass](https://res.cloudinary.com/hyuwah-github-io/image/upload/v1591783243/Muslim%20Companion%20Apps/qibla_compass.png)
 
 ## Getting Started
 
@@ -25,18 +40,15 @@ A work in progress app to learn MVP pattern. Data provided by [Al Quran Cloud AP
 * Sync gradle
 * Rebuild project, run
 
-## Info
+## Stack & Libs
 
-Target SDK : 26
-
-### Library Used
-
-- Butterknife (8.8.1)
-- Retrofit (2.4.0)
-    - Converter GSON (2.4.0)
-    - Okhttp3 Logging Interceptor (3.10.0)
-- Material Fancy Button (1.8.7)
-
+- MVVM
+- Repository Pattern
+- Retrofit
+- Koin
+- Viewbinding
+- Coroutine
+- [Animated Bottom Bar](https://github.com/Droppers/AnimatedBottomBar)
 
 ## License
 MIT
