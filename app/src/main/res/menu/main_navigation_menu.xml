@@ -10,6 +10,6 @@
     android:title="Prayer" />
   <item
     android:id="@+id/home_menu_qibla"
-    android:icon="@drawable/ic_menu_manage"
+    android:icon="@drawable/ic_compass"
     android:title="Qibla" />
 </menu>

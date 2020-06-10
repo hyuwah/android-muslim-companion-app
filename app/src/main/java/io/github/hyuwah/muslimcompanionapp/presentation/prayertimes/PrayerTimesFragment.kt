@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
-import androidx.recyclerview.widget.DividerItemDecoration
 import io.github.hyuwah.muslimcompanionapp.R
 import io.github.hyuwah.muslimcompanionapp.data.remote.model.PrayerTimeResponse
 import io.github.hyuwah.muslimcompanionapp.databinding.FragmentPrayerTimesBinding
@@ -27,10 +26,6 @@ class PrayerTimesFragment : Fragment(R.layout.fragment_prayer_times) {
 
         // Setup Adapter
         binding.rvPrayerTimes.adapter = adapter
-        binding.rvPrayerTimes.addItemDecoration(
-                DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
-        )
-
         binding.tvDate.text = LocalDate.now().format(DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy"))
 
         viewModel.prayerTimes.state.observe(viewLifecycleOwner, {

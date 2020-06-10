@@ -8,6 +8,13 @@
   android:padding="12dp"
   tools:context=".presentation.main.MainActivity">
 
+  <androidx.constraintlayout.widget.Guideline
+    android:id="@+id/guide_middle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_constraintGuide_percent="0.5" />
+
   <TextView
     android:id="@+id/tv_surah_name"
     android:layout_width="wrap_content"
@@ -17,6 +24,8 @@
     android:textStyle="bold"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/guide_middle"
+    app:layout_constraintHorizontal_bias="0"
     tools:text="Al-Fatihaah" />
   <TextView
     android:id="@+id/tv_surah_name_translation"
@@ -26,7 +35,23 @@
     android:textSize="14sp"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/tv_surah_name"
+    app:layout_constraintEnd_toStartOf="@id/guide_middle"
+    app:layout_constraintHorizontal_bias="0"
     tools:text="The Opening" />
+
+  <TextView
+    android:id="@+id/tv_ayah_number"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAlignment="textEnd"
+    android:textAllCaps="false"
+    android:textColor="@android:color/white"
+    android:textSize="14sp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_surah_name_translation"
+    app:layout_constraintEnd_toStartOf="@id/guide_middle"
+    app:layout_constraintHorizontal_bias="0"
+    tools:text="[1] : 1 of 7" />
 
   <ImageButton
     android:id="@+id/btn_more_options"
@@ -39,18 +64,6 @@
     app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
-    android:id="@+id/tv_ayah_number"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:textAlignment="textEnd"
-    android:textAllCaps="false"
-    android:textColor="@android:color/white"
-    android:textSize="14sp"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/btn_more_options"
-    tools:text="[1] : 1 of 7" />
-  <TextView
     android:id="@+id/tv_edition"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -58,8 +71,11 @@
     android:textColor="@android:color/white"
     android:textSize="12sp"
     android:textStyle="italic"
+    android:layout_marginTop="8dp"
     app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/tv_ayah_number"
+    app:layout_constraintTop_toBottomOf="@+id/btn_more_options"
+    app:layout_constraintLeft_toRightOf="@id/guide_middle"
+    app:layout_constraintHorizontal_bias="1"
     tools:text="Muhammad Quraish Shihab et al" />
 
   <androidx.constraintlayout.widget.Barrier
@@ -67,7 +83,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:barrierDirection="bottom"
-    app:constraint_referenced_ids="tv_surah_name_translation, tv_edition" />
+    app:constraint_referenced_ids="tv_ayah_number, tv_edition" />
 
   <TextView
     android:id="@+id/tv_ayah_text"
